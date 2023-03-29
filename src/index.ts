@@ -222,3 +222,234 @@ do {
   tarea1.urgencia++;
   tarea1.estado = Estados.Completado;
 } while (tarea1.estado !== Estados.Completado);
+
+// Funciones
+
+/**
+ * Funcion que muestra un saludo por consola
+ */
+
+function saludar() {
+  let nombre = "Erika";
+  console.log(`Hola ${nombre}!`);
+}
+
+// Invocación de la función
+saludar();
+
+/**
+ * Función que muestra un saludo por consola a una persona
+ * @param nombre Nombre de la persona a saludar
+ */
+
+function saludarPersona(nombre: string) {
+  console.log(`Hola ${nombre}!`);
+}
+
+saludarPersona("Erika");
+/**
+ * Función que muestra un adios por consola a una persona
+ * @param nombre Nombre de la persona a despedir por defecto sera Erika
+ */
+
+function despedirPersona(nombre: string = "Erika") {
+  console.log(`Adios, ${nombre}`);
+}
+
+despedirPersona(); // Adios, Erika
+despedirPersona("Juan"); // Adios, Juan
+
+/**
+ * Función que muestra un adios por consola a una persona
+ * @param nombre (opcional) Nombre de la persona a despedir
+ */
+function despedirOpcional(nombre?: string) {
+  if (nombre) {
+    console.log(`Adios, ${nombre}!`);
+  } else {
+    console.log(`Adios!`);
+  }
+}
+
+despedirOpcional(); // Adios!
+despedirOpcional("Juanjo"); // Adios Juanjo!
+
+function variosParams(nombre: string, apellidos?: string, edad: number = 18) {
+  if (apellidos) {
+    console.log(`${nombre} ${apellidos} tiene ${edad} años`);
+  } else {
+    console.log(`${nombre} tiene ${edad} años`);
+  }
+}
+
+variosParams("Erika"); // Erika tiene 18 años
+variosParams("Erika", "Pineda"); // Erika Pineda tiene 18 años
+variosParams("Erika", "Pineda", 20); // Erika Pineda tiene 20 años
+variosParams("Erika", undefined, 20); // Erika Pineda tiene 20 años
+
+function ejemploVariosTipos(a: string | number) {
+  if (typeof a === "string") {
+    console.log(`${a} es un string`);
+  } else if (typeof a === "number") {
+    console.log(`${a} es un numero`);
+  } else {
+    console.log(`${a} no es un string ni un numero`);
+    throw Error("A no es un string ni un numero");
+  }
+}
+
+ejemploVariosTipos("hola");
+ejemploVariosTipos(3);
+
+/**
+ *
+ * @param nombre Nombre de la persona
+ * @param apellidos  Apellidos de la persona
+ * @returns Nombre completo de la persona
+ */
+function ejemploReturn(nombre: string, apellidos: string): string {
+  return `${nombre} ${apellidos}`;
+}
+
+const nombreCompleto = ejemploReturn("Erika", "Pineda");
+console.log(nombreCompleto); // Erika Pineda
+console.log(ejemploReturn("Erika", "Pineda")); // Erika Pineda
+
+/**
+ *
+ * @param nombres es una lista de nombres de string
+ */
+function ejemploMultipleParams(...nombres: string[]) {
+  nombres.forEach((nombre) => {
+    console.log(nombre);
+  });
+}
+
+ejemploMultipleParams("Erika", "Pedro", "Juan", "Luis", "Maria");
+
+const lista = ["Alberto", "Sandra"];
+ejemploMultipleParams(...lista);
+
+function ejemploParamLista(nombres: string[]) {
+  nombres.forEach((nombre) => {
+    console.log(nombre);
+  });
+}
+
+ejemploParamLista(lista);
+
+type Empleado = {
+  nombre: string;
+  apellido: string;
+  edad: number;
+};
+
+let empleadoUno: Empleado = {
+  nombre: "Erika",
+  apellido: "Pineda",
+  edad: 30,
+};
+
+// Funciones flecha
+
+const mostrarEmpleado = (empleado: Empleado): string =>
+  `${empleado.nombre} ${empleado.apellido} tiene ${empleado.edad} años`;
+
+mostrarEmpleado(empleadoUno); // Erika Pineda tiene 30 años
+
+const datosEmpleado = (empleado: Empleado): string => {
+  if (empleado.edad > 70) {
+    return `${empleado.nombre} ${empleado.apellido} está en edad de jubilación`;
+  } else {
+    return `${empleado.nombre} ${empleado.apellido} está en edad laboral`;
+  }
+};
+
+datosEmpleado(empleadoUno); // Erika Pineda está en edad laboral
+
+const obtenerSalario = (empleado: Empleado, cobrar: () => string) => {
+  if (empleado.edad > 70) {
+    return;
+  } else {
+    return cobrar(); // callback a ejecutar
+  }
+};
+
+obtenerSalario(empleadoUno, () => "Cobrar Erika Pineda");
+
+const cobrarEmpleado = (empleado: Empleado) => {
+  console.log(`${empleado.nombre} ${empleado.apellido} cobra su salario`);
+};
+
+// Funciones Async
+
+async function ejemploAsync(): Promise<string> {
+  // Await
+
+  await console.log(
+    "Tarea a completar antes de seguir con la secuencia de instrucciones"
+  );
+  console.log("Tarea Completada");
+  return "Completado";
+}
+
+ejemploAsync()
+  .then((respuesta) => {
+    console.log("Respuesta", respuesta);
+  })
+  .catch((error) => {
+    console.log("Error", error);
+  })
+  .finally(() => {
+    console.log("Finalizado");
+  });
+
+// Generators
+
+function* ejemploGenerator() {
+  // yield
+
+  let index = 0;
+
+  while (index < 5) {
+    // Emitimos valor incrementado
+    yield index++;
+  }
+}
+
+// Guardamos la funcion generadora en una variable
+
+let generadora = ejemploGenerator();
+
+// Acceder a los valores emitidos
+
+console.log(generadora.next().value); // { value: 0, done: false }
+console.log(generadora.next().value); // { value: 1, done: false }
+console.log(generadora.next().value); // { value: 2, done: false }
+console.log(generadora.next().value); // { value: 3, done: false }
+console.log(generadora.next().value); // { value: 4, done: false }
+console.log(generadora.next().value); // { value: undefined, done: true }
+
+// Worker
+
+// Watcher
+
+function* watcher(valor: number) {
+  yield valor; // emitimos el valor inicial
+  yield* worker(valor); // Llamamos a las emisiones del worker para que emita otros valores
+  yield valor + 4; // emitimos el valor final + 4
+}
+
+function* worker(valor: number) {
+  yield valor + 1;
+  yield valor + 2;
+  yield valor + 3;
+}
+
+let generatorSaga = watcher(0);
+
+console.log(generatorSaga.next().value); // { value: 0, done: false }  lo ha hecho el watcher
+console.log(generatorSaga.next().value); // { value: 1, done: false }  lo ha hecho el worker
+console.log(generatorSaga.next().value); // { value: 2, done: false }  lo ha hecho el worker
+console.log(generatorSaga.next().value); // { value: 3, done: false }  lo ha hecho el worker
+console.log(generatorSaga.next().value); // { value: 4, done: false }  lo ha hecho el watcher
