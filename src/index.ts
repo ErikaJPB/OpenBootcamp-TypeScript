@@ -4,6 +4,9 @@ import {
   getCookieValue,
   setCookie,
 } from "cookies-utils";
+import { LISTA_CURSOS } from "./mock/cursos.mock";
+import Curso from "./modules/Curso";
+import { Estudiante } from "./modules/Estudiante";
 
 console.log("Hola Typescript");
 
@@ -548,3 +551,48 @@ delete miTemporazizador.terminar;
 document.getElementById("boton")?.addEventListener("click", () => {
   console.log("Haz hecho click");
 });
+
+// ** CLASES **
+
+// Creamos curso
+
+// const cursoTs: Curso = new Curso("TypeScript", 15);
+// const cursoJs: Curso = new Curso("JavaScript", 20);
+
+// const listaCursos: Curso[] = [];
+// listaCursos.push(cursoTs, cursoJs); // [Lista de cursos]
+
+// Usamos el Mock
+const listaCursos: Curso[] = LISTA_CURSOS;
+
+// Creamos estudiante
+const erika: Estudiante = new Estudiante("Erika", listaCursos, "Pineda");
+
+console.log(`${erika.nombre} estudia `);
+//Iteramos por cada uno de ellos
+erika.cursos.forEach((curso) => {
+  console.log(`${curso.nombre} (${curso.horas} horas)`); // Typescript (15 horas)
+});
+
+const cursoAngular: Curso = new Curso("Angular", 40);
+
+erika.cursos.push(cursoAngular); // [typeScript, JavaScript, Angular]
+
+erika.horasEstudiadas; // number
+
+//erika.ID; // es privada - la unica forma de acceder es generando un getter o un setter especifico para el ID
+
+erika.ID_Estudiante = "2244466"; // Se puede modificar y podria recibir nueva informacion
+
+// Saber instancia de un objeto/variable
+// Se suelen utilizar en javascript  porque si el codigo esta tipado no es necesario
+
+// Typeof
+if (typeof erika === "object") {
+  console.log("Es un objeto");
+}
+
+// Instanceof
+if (erika instanceof Estudiante) {
+  console.log("Es un estudiante");
+}
