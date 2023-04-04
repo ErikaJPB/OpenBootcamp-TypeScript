@@ -5,8 +5,11 @@ import {
   setCookie,
 } from "cookies-utils";
 import { LISTA_CURSOS } from "./mock/cursos.mock";
-import Curso from "./modules/Curso";
-import { Estudiante } from "./modules/Estudiante";
+import { Curso } from "./models/Curso";
+import { Estudiante } from "./models/Estudiante";
+import { Trabajador, Jefe } from "./models/Persona";
+import { ITarea, Nivel } from "./models/interfaces/ITarea";
+import { Programar } from "./models/Programar";
 
 console.log("Hola Typescript");
 
@@ -596,3 +599,115 @@ if (typeof erika === "object") {
 if (erika instanceof Estudiante) {
   console.log("Es un estudiante");
 }
+
+let fechaDeNacimiento = new Date(1986, 9, 22);
+
+if (fechaDeNacimiento instanceof Date) {
+  console.log("Es una fecha");
+}
+
+// **HERENCIA Y POLIMORFISMO**
+
+let trabajador1 = new Trabajador("Erika", "Pineda", 36, 2000);
+
+let trabajador2 = new Trabajador("Jose", "Perez", 30, 1000);
+
+let trabajador3 = new Trabajador("Maria", "Mendez", 40, 3000);
+
+trabajador1.saludar(); // herencia de Persona
+
+let jefe = new Jefe("Pablo", "Garcia", 50);
+
+jefe.trabajadores.push(trabajador1, trabajador2, trabajador3);
+
+jefe.trabajadores.forEach((trabajador: Trabajador) => {
+  trabajador.saludar();
+});
+
+trabajador1.saludar(); // herencia de Persona
+jefe.saludar(); // herencia de Persona
+
+// Interfaces
+
+let programar: ITarea = {
+  titulo: "Programar en TypeScript",
+  descripcion: "Practicar con Katas para aprender a desarrollar con TS",
+  urgencia: Nivel.Urgente,
+  completada: false,
+  resumen: function (): string {
+    return `${this.titulo} - ${this.completada} - Nivcel: ${this.urgencia}`;
+  },
+};
+
+console.log(programar.resumen());
+
+// Tarea de Programacion
+
+let programarTS = new Programar(
+  "TypeScript",
+  "Tarea de programacion en TS",
+  false,
+  Nivel.Bloqueante
+);
+console.log(programarTS.resumen());
+
+// ** Decoradores experimentales ---> @ **
+// -Clases
+// -Parametros
+// -Metodos
+// -Propiedades
+
+function Override(label: string) {
+  return function (target: any, key: string) {
+    Object.defineProperty(target, key, {
+      configurable: false,
+      get: () => label,
+    });
+  };
+}
+
+class PruebaDecorador {
+  @Override("Prueba") // llamar a la funcion override
+  nombre: string = "Erika";
+}
+
+let prueba = new PruebaDecorador();
+console.log(prueba.nombre); // "Prueba" - simpre devolvera prueba, a pesar de q se le ponga otro valor.
+
+// Otra funcion para usarla como decorador
+
+function SoloLectura(target: any, key: string) {
+  Object.defineProperty(target, key, {
+    writable: false,
+  });
+}
+
+class PruebaSoloLectura {
+  @SoloLectura
+  nombre: string = "";
+}
+
+let pruebaLectura = new PruebaSoloLectura();
+pruebaLectura.nombre = "Erika";
+
+console.log(pruebaLectura.nombre); // undefined, no se le puede dar un valor, es solo de lectura
+
+// Decorador para parametros de un metodo
+function mostrarPosicion(
+  target: any,
+  propertyKey: string,
+  parameterIndex: number
+) {
+  console.log("Posicion: ", parameterIndex);
+}
+
+class PruebaMetodoDecorador {
+  prueba(a: string, @mostrarPosicion b: boolean) {
+    console.log(b);
+  }
+}
+
+let newPruebaMetodoDecorador = new PruebaMetodoDecorador().prueba(
+  "Hola",
+  false
+);
