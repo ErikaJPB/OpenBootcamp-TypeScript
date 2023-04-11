@@ -711,3 +711,40 @@ let newPruebaMetodoDecorador = new PruebaMetodoDecorador().prueba(
   "Hola",
   false
 );
+
+// Patrones de diseño
+
+/** Patrones Creacionales
+ * - Mecanismos de creacion de objetos
+ * - Realizacion del codigo
+ * - Ofrecer flexibilidad al codigo
+
+*/
+
+/** Patrones Estructurales
+ * - Eficiencia y flexibilidad de la estructura a la hora de definir clases y objetos
+ */
+
+/** Patrones de comportamiento
+ * - Centrados en la asignacion efectiva de responsabilidad entre objetos
+ *  - Comunicacion efectiva entre objetos
+ */
+
+// Patrones Creacionales
+
+const miPrimerSingleton = Singleton.getInstance();
+const miSegundoSingleton = Singleton.getInstance();
+
+// Comprueba si los dos son iguales
+
+if (miPrimerSingleton === miSegundoSingleton) {
+  console.log(
+    "Singleton funciona, ambas variables son iguales y contienen la misma instancia"
+  );
+  miPrimerSingleton.mostrarPorConsola();
+  miSegundoSingleton.mostrarPorConsola();
+} else {
+  console.log(
+    "Error, Singleton no funciona, las variables son diferentes, contienen diferentes instancias"
+  );
+}
