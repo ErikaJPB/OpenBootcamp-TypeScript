@@ -2,11 +2,14 @@
     "docwriter.language": "Spanish",
     "cSpell.words": [
         "codepaths",
+        "colombia",
         "dinámicamente",
         "encapsulación",
         "indirección",
         "manejadores",
         "modularidad",
-        "tsbuildinfo"
+        "superclase",
+        "tsbuildinfo",
+        "visitables"
     ]
 }
