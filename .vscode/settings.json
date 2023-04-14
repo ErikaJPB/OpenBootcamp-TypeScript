@@ -1,10 +1,12 @@
 {
     "docwriter.language": "Spanish",
     "cSpell.words": [
+        "codepaths",
         "dinámicamente",
         "encapsulación",
         "indirección",
         "manejadores",
-        "modularidad"
+        "modularidad",
+        "tsbuildinfo"
     ]
 }

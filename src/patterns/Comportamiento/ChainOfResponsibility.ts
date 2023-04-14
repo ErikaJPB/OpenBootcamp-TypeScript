@@ -87,4 +87,4 @@ class PaymentProcessor {
 const paymentProcessor = new PaymentProcessor();
 console.log(paymentProcessor.processPayment(400)); // Payment processed with Credit Card
 console.log(paymentProcessor.processPayment(1000)); // Payment processed with PayPal
-console.log(paymentProcessor.processPayment(3000)); // No payment method available.
+console.log(paymentProcessor.processPayment(3000)); // No payment method available
