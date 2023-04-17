@@ -1,13 +1,13 @@
 // Proporciona un objeto como un sustituto de otro objeto. El objetivo es controlar el acceso al objeto original, proporcionando una capa adicional de indirección entre el cliente y el objeto original.Un ejemplo común del patrón Proxy es el proxy remoto, donde el objeto proxy se utiliza para acceder a un objeto remoto. El objeto proxy se encarga de las comunicaciones con el objeto remoto y proporciona una interfaz similar a la del objeto original.
 
 // Interfaz Subject que define la interfaz para el objeto real y el objeto proxy.
-interface Subject {
+interface SubjectOne {
   request(): void;
 }
 
 // La clase RealSubject es el objeto real que maneja la petición.
 
-class RealSubject implements Subject {
+class RealSubject implements SubjectOne {
   public request(): void {
     console.log("RealSubject:  Manejando la petición");
   }
@@ -15,7 +15,7 @@ class RealSubject implements Subject {
 
 // La clase ProxySubject actúa como un sustituto del objeto real y se encarga de controlar el acceso al objeto real.
 
-class ProxySubject implements Subject {
+class ProxySubject implements SubjectOne {
   private realSubject: RealSubject;
 
   constructor(realSubject: RealSubject) {

@@ -13,7 +13,7 @@ import { Programar } from "./models/Programar";
 
 console.log("Hola Typescript");
 
-// Declaracion de variables:
+// Declaración de variables:
 
 var name: string = "Erika";
 
@@ -104,7 +104,7 @@ let miUrgencia = miTarea.urgencia;
 let { titulo, estado, urgencia } = miTarea;
 
 // En listas
-let listaCompraLunes: string[] = ["Leche", "Agua", "Azucar"];
+let listaCompraLunes: string[] = ["Leche", "Agua", "Azúcar"];
 let listaCompraMartes: string[] = [
   ...listaCompraLunes,
   "Carne",
@@ -239,7 +239,7 @@ do {
 // Funciones
 
 /**
- * Funcion que muestra un saludo por consola
+ * Función que muestra un saludo por consola
  */
 
 function saludar() {
@@ -430,7 +430,7 @@ function* ejemploGenerator() {
   }
 }
 
-// Guardamos la funcion generadora en una variable
+// Guardamos la función generadora en una variable
 
 let generadora = ejemploGenerator();
 
@@ -475,9 +475,9 @@ function mostrarError(error: string | number): void {
 
 // Persistencia de datos
 
-// 1. Local Storage --> Almacena los datos en el navegador de forma persistente, no se elimina automaticamente.
-// 2. Session Storage --> La diferencia radica en la sesion del navegador, los datos persisten en la sesion del navegador.
-// 3. Cookies --> Tienen una fecha de caducidad y tienen un ambito de URL.
+// 1. Local Storage --> Almacena los datos en el navegador de forma persistente, no se elimina automáticamente.
+// 2. Session Storage --> La diferencia radica en la sesión del navegador, los datos persisten en la sesión del navegador.
+// 3. Cookies --> Tienen una fecha de caducidad y tienen un ámbito de URL.
 
 // Local Storage
 
@@ -503,19 +503,19 @@ const cookieOptions = {
   path: "/", // optional string,
 };
 
-//setear cookie
-setCookie(cookieOptions);
+// //setear cookie
+// setCookie(cookieOptions);
 
-// eliminar cookie
-deleteCookie("usuario");
+// // eliminar cookie
+// deleteCookie("usuario");
 
-//eliminar todas las cookies
-deleteAllCookies();
+// //eliminar todas las cookies
+// deleteAllCookies();
 
-//leer cookie
-let cookieLeida = getCookieValue("usuario");
+// //leer cookie
+// let cookieLeida = getCookieValue("usuario");
 
-// Gestion de eventos
+// Gestión de eventos
 
 // Clase temporizador
 
@@ -524,34 +524,34 @@ class Temporizador {
 
   public empezar(): void {
     setTimeout(() => {
-      //Comprobamos que existe la funcion terminar como callback
+      //Comprobamos que existe la función terminar como callback
       if (!this.terminar) return;
 
-      // Cuando haya pasado el tiempo se ejecutara la funcion terminar
+      // Cuando haya pasado el tiempo se ejecutara la función terminar
       this.terminar();
     }, 10000);
   }
 }
 
-const miTemporazizador: Temporizador = new Temporizador();
+const miTemporizador: Temporizador = new Temporizador();
 
-// Definir la funcion del callback a ejecutar cuando termine el tiempo del temporizador
+// Definir la función del callback a ejecutar cuando termine el tiempo del temporizador
 
-miTemporazizador.terminar = () => {
+miTemporizador.terminar = () => {
   console.log("Evento Terminado");
 };
 
 // Lanzamos el temporizador
 
-miTemporazizador.empezar(); // Inicia el time out y cuando termine, se ejecuta la funcion terminar.
+miTemporizador.empezar(); // Inicia el time out y cuando termine, se ejecuta la función terminar.
 
 setInterval(() => console.log("Tic"), 10000);
 
-// Eliminar la ejecucion de la funcion
-delete miTemporazizador.terminar;
+// Eliminar la ejecución de la función
+delete miTemporizador.terminar;
 
 // Extender de EventTarget
-document.getElementById("boton")?.addEventListener("click", () => {
+document.getElementById("botón")?.addEventListener("click", () => {
   console.log("Haz hecho click");
 });
 
@@ -583,12 +583,12 @@ erika.cursos.push(cursoAngular); // [typeScript, JavaScript, Angular]
 
 erika.horasEstudiadas; // number
 
-//erika.ID; // es privada - la unica forma de acceder es generando un getter o un setter especifico para el ID
+//erika.ID; // es privada - la única forma de acceder es generando un getter o un setter especifico para el ID
 
-erika.ID_Estudiante = "2244466"; // Se puede modificar y podria recibir nueva informacion
+erika.ID_Estudiante = "2244466"; // Se puede modificar y podría recibir nueva información
 
 // Saber instancia de un objeto/variable
-// Se suelen utilizar en javascript  porque si el codigo esta tipado no es necesario
+// Se suelen utilizar en javascript  porque si el código esta tipado no es necesario
 
 // Typeof
 if (typeof erika === "object") {
@@ -635,17 +635,17 @@ let programar: ITarea = {
   urgencia: Nivel.Urgente,
   completada: false,
   resumen: function (): string {
-    return `${this.titulo} - ${this.completada} - Nivcel: ${this.urgencia}`;
+    return `${this.titulo} - ${this.completada} - Nivel: ${this.urgencia}`;
   },
 };
 
 console.log(programar.resumen());
 
-// Tarea de Programacion
+// Tarea de Programación
 
 let programarTS = new Programar(
   "TypeScript",
-  "Tarea de programacion en TS",
+  "Tarea de programación en TS",
   false,
   Nivel.Bloqueante
 );
@@ -653,71 +653,71 @@ console.log(programarTS.resumen());
 
 // ** Decoradores experimentales ---> @ **
 // -Clases
-// -Parametros
-// -Metodos
+// -Parámetros
+// -Métodos
 // -Propiedades
 
-function Override(label: string) {
-  return function (target: any, key: string) {
-    Object.defineProperty(target, key, {
-      configurable: false,
-      get: () => label,
-    });
-  };
-}
+// function Override(label: string) {
+//   return function (target: any, key: string) {
+//     Object.defineProperty(target, key, {
+//       configurable: false,
+//       get: () => label,
+//     });
+//   };
+// }
 
-class PruebaDecorador {
-  @Override("Prueba") // llamar a la funcion override
-  nombre: string = "Erika";
-}
+// class PruebaDecorador {
+//   @Override("Prueba") // llamar a la función override
+//   nombre: string = "Erika";
+// }
 
-let prueba = new PruebaDecorador();
-console.log(prueba.nombre); // "Prueba" - simpre devolvera prueba, a pesar de q se le ponga otro valor.
+// let prueba = new PruebaDecorador();
+// console.log(prueba.nombre); // "Prueba" - siempre devolverá prueba, a pesar de q se le ponga otro valor.
 
-// Otra funcion para usarla como decorador
+// Otra función para usarla como decorador
 
-function SoloLectura(target: any, key: string) {
-  Object.defineProperty(target, key, {
-    writable: false,
-  });
-}
+// function SoloLectura(target: any, key: string) {
+//   Object.defineProperty(target, key, {
+//     writable: false,
+//   });
+// }
 
-class PruebaSoloLectura {
-  @SoloLectura
-  nombre: string = "";
-}
+// class PruebaSoloLectura {
+//   @SoloLectura
+//   nombre: string = "";
+// }
 
-let pruebaLectura = new PruebaSoloLectura();
-pruebaLectura.nombre = "Erika";
+// let pruebaLectura = new PruebaSoloLectura();
+// pruebaLectura.nombre = "Erika";
 
-console.log(pruebaLectura.nombre); // undefined, no se le puede dar un valor, es solo de lectura
+// console.log(pruebaLectura.nombre); // undefined, no se le puede dar un valor, es solo de lectura
 
-// Decorador para parametros de un metodo
-function mostrarPosicion(
-  target: any,
-  propertyKey: string,
-  parameterIndex: number
-) {
-  console.log("Posicion: ", parameterIndex);
-}
+// Decorador para parámetros de un método
+// function mostrarPosición(
+//   target: any,
+//   propertyKey: string,
+//   parameterIndex: number
+// ) {
+//   console.log("Posición: ", parameterIndex);
+// }
 
-class PruebaMetodoDecorador {
-  prueba(a: string, @mostrarPosicion b: boolean) {
-    console.log(b);
-  }
-}
+// class PruebaMetodoDecorador {
+//   prueba(a: string, @mostrarPosición b: boolean) {
+//     console.log(b);
+//   }
+// }
 
-let newPruebaMetodoDecorador = new PruebaMetodoDecorador().prueba(
-  "Hola",
-  false
-);
+// let newPruebaMetodoDecorador = new PruebaMetodoDecorador().prueba(
+//   "Hola",
+//   false
+// );
 
 // Patrones de diseño
 
 /** Patrones Creacionales
- * - Mecanismos de creacion de objetos
- * - Realizacion del codigo
- * - Ofrecer flexibilidad al codigo
+ * - Mecanismos de creación de objetos
+ * - Realización del código
+ * - Ofrecer flexibilidad al código
 
 */
 
@@ -726,25 +726,25 @@ let newPruebaMetodoDecorador = new PruebaMetodoDecorador().prueba(
  */
 
 /** Patrones de comportamiento
- * - Centrados en la asignacion efectiva de responsabilidad entre objetos
- *  - Comunicacion efectiva entre objetos
+ * - Centrados en la asignación efectiva de responsabilidad entre objetos
+ *  - Comunicación efectiva entre objetos
  */
 
 // Patrones Creacionales
 
-const miPrimerSingleton = Singleton.getInstance();
-const miSegundoSingleton = Singleton.getInstance();
+// const miPrimerSingleton = Singleton.getInstance();
+// const miSegundoSingleton = Singleton.getInstance();
 
 // Comprueba si los dos son iguales
 
-if (miPrimerSingleton === miSegundoSingleton) {
-  console.log(
-    "Singleton funciona, ambas variables son iguales y contienen la misma instancia"
-  );
-  miPrimerSingleton.mostrarPorConsola();
-  miSegundoSingleton.mostrarPorConsola();
-} else {
-  console.log(
-    "Error, Singleton no funciona, las variables son diferentes, contienen diferentes instancias"
-  );
-}
+// if (miPrimerSingleton === miSegundoSingleton) {
+//   console.log(
+//     "Singleton funciona, ambas variables son iguales y contienen la misma instancia"
+//   );
+//   miPrimerSingleton.mostrarPorConsola();
+//   miSegundoSingleton.mostrarPorConsola();
+// } else {
+//   console.log(
+//     "Error, Singleton no funciona, las variables son diferentes, contienen diferentes instancias"
+//   );
+// }

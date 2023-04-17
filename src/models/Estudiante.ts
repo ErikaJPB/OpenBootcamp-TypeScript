@@ -21,8 +21,8 @@ export class Estudiante {
   }
 
   // ** GETTERS **
-  //   No es un metodo es una propiedad funcional
-  //Cuando es solicitada se ejecuta una funcion completa.
+  //   No es un método es una propiedad funcional
+  //Cuando es solicitada se ejecuta una función completa.
 
   get horasEstudiadas(): number {
     let horasEstudiadas = 0;
